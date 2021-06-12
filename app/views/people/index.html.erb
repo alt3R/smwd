@@ -1,0 +1,9 @@
+<h1>Tracked People</h1>
+<ul>
+  <% @people.each do |person| %>
+    <li>
+      <%= link_to person.full_name, person %>
+    </li>
+  <% end %>
+</ul>
+<%= link_to "New Tracked Person", new_person_path %>

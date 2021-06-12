@@ -1,2 +1,0 @@
-class TrackedPerson < ApplicationRecord
-end
