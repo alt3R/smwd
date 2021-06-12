@@ -1,2 +1,8 @@
-<h1>TrackedPersons#index</h1>
-<p>Find me in app/views/tracked_persons/index.html.erb</p>
+<h1>Tracked Persons</h1>
+<ul>
+  <% @tracked_persons.each do |tracked_person| %>
+    <li>
+      <%= tracked_person&.full_name %>
+    </li>
+  <% end %>
+</ul>
