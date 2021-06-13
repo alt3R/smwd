@@ -14,6 +14,26 @@
     <% end %>
   </div>
   <div>
+    <%= form.label :email %><br>
+    <%= form.text_field :email %>
+  </div>
+  <div>
+    <%= form.label :birthday %><br>
+    <%= form.date_field :birthday %>
+  </div>
+  <div>
+    <%= form.label :city %><br>
+    <%= form.text_field :city %>
+  </div>
+  <div>
+    <%= form.label :region %><br>
+    <%= form.text_field :region %>
+  </div>
+  <div>
+    <%= form.label :country %><br>
+    <%= form.text_field :country %>
+  </div>
+  <div>
     <%= form.submit %>
   </div>
 <% end %>

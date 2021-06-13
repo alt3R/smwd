@@ -2,7 +2,7 @@
 <ul>
   <% @people.each do |person| %>
     <li>
-      <%= link_to person.full_name, person %>
+      <%= link_to(person.full_name != 'undefined' ? person.full_name : person.username, person) %>
     </li>
   <% end %>
 </ul>

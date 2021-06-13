@@ -17,7 +17,7 @@ ActiveRecord::Schema.define(version: 2021_06_12_180718) do
 
   create_table "people", force: :cascade do |t|
     t.string "full_name"
-    t.string "birthday"
+    t.datetime "birthday"
     t.string "username"
     t.string "email"
     t.string "city"
