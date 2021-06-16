@@ -63,6 +63,7 @@ GEM
     bindex (0.8.1)
     bootsnap (1.7.5)
       msgpack (~> 1.0)
+    browser (5.3.1)
     builder (3.2.4)
     byebug (11.1.3)
     concurrent-ruby (1.1.9)
@@ -178,6 +179,7 @@ PLATFORMS
 
 DEPENDENCIES
   bootsnap (>= 1.4.4)
+  browser
   byebug
   jbuilder (~> 2.7)
   listen (~> 3.3)
