@@ -4,11 +4,11 @@ module ApiClient
   extend ActiveSupport::Concern
 
   SIGHTENGINE_API_URI = 'https://api.sightengine.com/1.0/check.json'
-  SIGHTENGINE_API_USER = Rails.application.credentials.dig(:keys, :sightengine, :user)
-  SIGHTENGINE_API_SECRET = Rails.application.credentials.dig(:keys, :sightengine, :secret)
+  SIGHTENGINE_API_USER = Rails.application.credentials.sightengine[:user]
+  SIGHTENGINE_API_SECRET = Rails.application.credentials.sightengine[:secret]
 
   SOCIAL_SEARCHER_API_URI = 'https://api.social-searcher.com/v2/search'
-  SOCIAL_SEARCHER_API_KEY = Rails.application.credentials.dig(:keys, :social_searcher, :key)
+  SOCIAL_SEARCHER_API_KEY = Rails.application.credentials.social_searcher[:key]
 
   def send_request(addr, opts = nil, type: :json, method: 'get')
     uri = URI(addr)
