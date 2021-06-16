@@ -10,12 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_16_181724) do
+ActiveRecord::Schema.define(version: 2021_06_16_123016) do
 
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pgcrypto"
   enable_extension "plpgsql"
 
-  create_table "people", force: :cascade do |t|
+  create_table "people", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "full_name"
     t.datetime "birthday"
     t.string "username"
@@ -23,13 +24,13 @@ ActiveRecord::Schema.define(version: 2021_06_16_181724) do
     t.string "city"
     t.string "region"
     t.string "country"
+    t.jsonb "metadata", default: {}, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.jsonb "metadata", default: {}, null: false
     t.index ["metadata"], name: "index_people_on_metadata", using: :gin
   end
 
-  create_table "visitors", force: :cascade do |t|
+  create_table "visitors", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.datetime "online"
     t.jsonb "metadata", default: {}, null: false
     t.datetime "created_at", precision: 6, null: false

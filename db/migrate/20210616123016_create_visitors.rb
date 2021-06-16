@@ -1,6 +1,6 @@
 class CreateVisitors < ActiveRecord::Migration[6.1]
   def change
-    create_table :visitors do |t|
+    create_table :visitors, id: :uuid do |t|
       t.datetime :online
       t.jsonb :metadata, null: false, default: {}
 

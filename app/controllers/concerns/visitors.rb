@@ -14,7 +14,7 @@ module Visitors
   def load_visitor
     return if cookies.encrypted[:visitor].blank?
     return unless cookies.encrypted[:visitor].try(:[], :type) == 'Visitor'
-    return unless cookies.encrypted[:visitor].try(:[], :id).is_a?(Integer)
+    return unless cookies.encrypted[:visitor].try(:[], :id).is_a?(String)
 
     visitor = Visitor.find_by(id: cookies.encrypted[:visitor][:id])
     visitor = update_visitor(visitor) if visitor.present?
