@@ -7,17 +7,6 @@
     <% end %>
   </div>
   <div>
-    <%= form.label :username %><br>
-    <%= form.text_field :username %><br>
-    <% @person.errors.full_messages_for(:username).each do |message| %>
-      <div><%= message %></div>
-    <% end %>
-  </div>
-  <div>
-    <%= form.label :email %><br>
-    <%= form.text_field :email %>
-  </div>
-  <div>
     <%= form.label :birthday %><br>
     <%= form.date_field :birthday %>
   </div>
@@ -31,7 +20,7 @@
   </div>
   <div>
     <%= form.label :country %><br>
-    <%= form.text_field :country %>
+    <%= form.country_select :country %>
   </div>
   <div>
     <%= form.submit %>
