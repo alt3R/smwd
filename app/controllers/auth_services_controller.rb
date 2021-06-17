@@ -1,17 +1,13 @@
 class AuthServicesController < ApplicationController
+
+  include ApiServices::VK
+
   def vk
     redirect_to root_path and return if Current.visitor.metadata.dig('vk', 'access_token')
     return unless %w[code state].all? { |k| vk_auth_params.key?(k) }
     return unless vk_auth_params[:state] == Current.visitor.id
 
-    resp = {}
-    resp['vk'] = send_request(
-      'https://oauth.vk.com/access_token' \
-      "?client_id=#{Rails.application.credentials.vk[:client_id]}" \
-      "&client_secret=#{Rails.application.credentials.vk[:client_secret]}" \
-      "&redirect_uri=#{heroku_url}/auth-in-vk" \
-      "&code=#{vk_auth_params[:code]}"
-    )
+    resp = vk_access_token
     update_visitor(Current.visitor, resp) if resp['vk'].present?
     redirect_to root_path
   end
