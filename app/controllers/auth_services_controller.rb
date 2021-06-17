@@ -1,6 +1,6 @@
 class AuthServicesController < ApplicationController
   def vk
-    redirect_to root_path if Current.visitor.metadata.dig('vk', 'access_token')
+    redirect_to root_path and return if Current.visitor.metadata.dig('vk', 'access_token')
     return unless %w[code state].all? { |k| vk_auth_params.key?(k) }
     return unless vk_auth_params[:state] == Current.visitor.id
 
@@ -13,6 +13,7 @@ class AuthServicesController < ApplicationController
       "&code=#{vk_auth_params[:code]}"
     )
     update_visitor(Current.visitor, resp) if resp['vk'].present?
+    redirect_to root_path
   end
 
   private
