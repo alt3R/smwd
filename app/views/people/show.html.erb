@@ -1,7 +1,7 @@
 <h1><%= @person.full_name != 'undefined' ? @person.full_name : @person.username %></h1>
 <p>Username: <%= @person.username %></p>
 <p>Email: <%= @person.email %></p>
-<p>Birthday: <%= @person.birthday.strftime('%d.%m.%Y') %></p>
+<p>Birthday: <%= @person.birthday&.strftime('%d.%m.%Y') %></p>
 <p>Country: <%= @person.country %></p>
 <p>Region: <%= @person.region %></p>
 <p>City: <%= @person.city %></p>
