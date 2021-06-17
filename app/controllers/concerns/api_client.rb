@@ -12,12 +12,12 @@ module ApiClient
 
   def send_request(addr, opts = nil, type: :json, method: :get)
     uri = URI(addr)
-    case method
-    when :get
-      get_request(uri, opts)
-    else
-      standard_request(uri, opts, method)
-    end
+    response = case method
+               when :get
+                 get_request(uri, opts)
+               else
+                 standard_request(uri, opts, method)
+               end
     return standard(response.body) if type == :standard
 
     json(response.body)
