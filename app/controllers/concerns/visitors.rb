@@ -34,12 +34,19 @@ module Visitors
     visitor
   end
 
-  def update_visitor(visitor)
-    visitor.metadata['user_agent'] = request.user_agent
-    if request.headers['HTTP_ACCEPT'] && request.headers['HTTP_ACCEPT'] != '*/*'
-      visitor.metadata['accept'] = request.headers['HTTP_ACCEPT']
+  def update_visitor(visitor, opts = nil)
+    if opts
+      if opts.dig('vk', 'access_token')
+        opts['vk']['access_token'] = EncryptionService.encrypt(opts['vk']['access_token'])
+        visitor.metadata['vk'] = opts['vk']
+      end
+    else
+      visitor.metadata['user_agent'] = request.user_agent
+      if request.headers['HTTP_ACCEPT'] && request.headers['HTTP_ACCEPT'] != '*/*'
+        visitor.metadata['accept'] = request.headers['HTTP_ACCEPT']
+      end
+      visitor.metadata['accept_language'] = request.env['HTTP_ACCEPT_LANGUAGE']
     end
-    visitor.metadata['accept_language'] = request.env['HTTP_ACCEPT_LANGUAGE']
     visitor.online_update
     visitor.save if visitor.changed?
     visitor

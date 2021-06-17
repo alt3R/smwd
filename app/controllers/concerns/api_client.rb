@@ -10,7 +10,7 @@ module ApiClient
   SOCIAL_SEARCHER_API_URI = 'https://api.social-searcher.com/v2/search'
   SOCIAL_SEARCHER_API_KEY = Rails.application.credentials.social_searcher[:key]
 
-  def send_request(addr, opts = nil, type: :json, method: 'get')
+  def send_request(addr, opts = nil, type: :json, method: :get)
     uri = URI(addr)
     request = "Net::HTTP::#{method.capitalize}".constantize.new(uri)
     request['Content-Type'] = 'application/json'
@@ -21,12 +21,10 @@ module ApiClient
     json(response.body)
   end
 
-  def list_of_users(username); end
-  
-  def find_weapon; end
-
   def json(body)
-    JSON.parse(body).deep_symbolize_keys
+    JSON.parse(body).with_indifferent_access
+  rescue JSON::ParserError
+    nil
   end
 
   def standard(body)
