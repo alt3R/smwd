@@ -1,0 +1,31 @@
+<style>
+  table {
+    border-collapse: collapse;
+  }
+  thead {
+    background-color: #cecece;
+  }
+  td, th {
+    border: 1px solid black;
+    padding: 0.5em;
+  }
+</style>
+<h1><%= @person.full_name %></h1>
+<div>
+  <table>
+    <thead>
+      <tr>
+        <th>Фото</th>
+        <th>Оценка</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @analysis&.metadata&.dig('vk', @person.metadata.dig('vk', 'user_id'))&.sort_by { |p| -p['accuracy'] }&.each_with_index do |photo, index| %>
+        <tr>
+          <td><%= link_to("Фото № #{index.next}", photo['photo_url'], target: :_blank) %></td>
+          <td><%= photo['accuracy'] %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

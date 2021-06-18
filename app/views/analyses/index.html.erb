@@ -1,0 +1,10 @@
+<h1>People to analyze</h1>
+<ul>
+  <% @people.each do |person| %>
+    <% if person.metadata.dig('vk', 'user_id') %>
+      <li>
+        <%= link_to(person.full_name, analysis_path(person)) %>
+      </li>
+    <% end %>
+  <% end %>
+</ul>

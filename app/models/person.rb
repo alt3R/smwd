@@ -1,4 +1,6 @@
 class Person < ApplicationRecord
+  has_many :analyses, dependent: :destroy
+
   validates :full_name, presence: true
 
   def assign_fields(fields)

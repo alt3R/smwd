@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 module ApiClient
-  extend ActiveSupport::Concern
-
   SIGHTENGINE_API_URI = 'https://api.sightengine.com/1.0/check.json'
   SIGHTENGINE_API_USER = Rails.application.credentials.sightengine[:user]
   SIGHTENGINE_API_SECRET = Rails.application.credentials.sightengine[:secret]

@@ -74,7 +74,7 @@ module ApiServices
       return @vk_users = [] unless @person&.full_name
 
       addr = 'https://api.vk.com/method/users.search'
-      attrs = [['q', @person.full_name], ['fields', 'domain']]
+      attrs = [['q', @person.full_name], %w[fields domain]]
       attrs << ['city', @person.metadata.dig('vk', 'city_id')] if @person.metadata.dig('vk', 'city_id')
       attrs << ['country', @person.metadata.dig('vk', 'country_id')] if @person.metadata.dig('vk', 'country_id')
       if @person.birthday
