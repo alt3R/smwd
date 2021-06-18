@@ -1,7 +1,5 @@
 class AuthServicesController < ApplicationController
 
-  include ApiServices::VK
-
   def vk
     redirect_to root_path and return if Current.visitor.metadata.dig('vk', 'access_token')
     return unless %w[code state].all? { |k| vk_auth_params.key?(k) }

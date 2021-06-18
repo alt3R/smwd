@@ -1,0 +1,22 @@
+<h1>VK Fields</h1>
+<%= form_with model: @person do |form| %>
+  <div>
+    <%= form.label :user %><br>
+    <%= form.select :vk_user_id, @vk_users, {}, disabled: @vk_users.blank? %>
+  </div>
+  <div>
+    <%= form.label :country %><br>
+    <%= form.select :vk_country_id, @vk_countries, {}, disabled: @vk_countries.blank? %>
+  </div>
+  <div>
+    <%= form.label :region %><br>
+    <%= form.select :vk_region_id, @vk_regions, {}, disabled: @vk_regions.blank? %>
+  </div>
+  <div>
+    <%= form.label :city %><br>
+    <%= form.select :vk_city_id, @vk_cities, {}, disabled: @vk_cities.blank? %>
+  </div>
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

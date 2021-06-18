@@ -1,11 +1,12 @@
 class PeopleController < ApplicationController
+  before_action :set_person, except: %i[index new create]
+  before_action :vk_attrs, only: [:edit], if: -> { request.get? }
+
   def index
     @people = Person.all
   end
 
-  def show
-    @person = Person.find(params[:id])
-  end
+  def show; end
 
   def new
     @person = Person.new
@@ -21,13 +22,10 @@ class PeopleController < ApplicationController
     end
   end
 
-  def edit
-    @person = Person.find(params[:id])
-  end
+  def edit; end
 
   def update
-    @person = Person.find(params[:id])
-
+    @person.assign_fields(vk_params) if vk_params.present?
     if @person.update(person_params)
       redirect_to @person
     else
@@ -36,13 +34,16 @@ class PeopleController < ApplicationController
   end
 
   def destroy
-    @person = Person.find(params[:id])
     @person.destroy
 
     redirect_to root_path
   end
 
   private
+
+  def set_person
+    @person = Person.find(params[:id])
+  end
 
   def person_params
     params.require(:person).permit(:full_name, :birthday, :city, :region, :country)

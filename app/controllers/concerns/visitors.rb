@@ -36,10 +36,7 @@ module Visitors
 
   def update_visitor(visitor, opts = nil)
     if opts
-      if opts.dig('vk', 'access_token')
-        opts['vk']['access_token'] = EncryptionService.encrypt(opts['vk']['access_token'])
-        visitor.metadata['vk'] = opts['vk']
-      end
+      visitor.set_vk_attrs(opts) if opts.dig('vk', 'access_token')
     else
       visitor.metadata['user_agent'] = request.user_agent
       if request.headers['HTTP_ACCEPT'] && request.headers['HTTP_ACCEPT'] != '*/*'

@@ -4,6 +4,9 @@
 <p>Region: <%= @person.region %></p>
 <p>City: <%= @person.city %></p>
 <ul>
+  <% if @person.metadata.dig('vk', 'user_id') %>
+    <li><%= link_to "Person in VK", "https://vk.com/id#{@person.metadata['vk']['user_id']}", target: :_blank %></li>
+  <% end %>
   <li><%= link_to "Edit", edit_person_path(@person) %></li>
   <li><%= link_to "Destroy", person_path(@person),
                   method: :delete,
